@@ -1,4 +1,4 @@
-/* Basis-Resets */
+/* Basis-Reset */
 * {
   margin: 0;
   padding: 0;
@@ -12,19 +12,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Hero Section */
-.hero {
+/* Die große Section zum Scrollen */
+.scroll-container {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  /* bildschirmfüllend */
-  overflow: hidden;
-  background-color: #000;
-  /* Fallback-Hintergrund */
+  /* 200vh => 2 Bildschirmhöhen, sodass man schön scrollen kann */
+  height: 200vh;
+  background: #000;
+  /* z. B. Schwarz als Hintergrund */
 }
 
-/* Vollflächiges Hero-Hintergrundbild */
-.hero-image {
+/* STICKY WRAPPER, "klebt" oben, während wir scrollen */
+.sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  /* füllt immer genau den Viewport */
+  overflow: hidden;
+}
+
+/* Das fullscreen Hero-Bild */
+.hero-full {
   position: absolute;
   top: 0;
   left: 0;
@@ -34,80 +41,62 @@ body {
   transform: scale(1);
   transform-origin: center center;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  /* Wir steuern scale + opacity später dynamisch per JS */
 }
 
-/* Optionaler Text im Hero */
-.hero-title {
+/* iPhone-Wrapper: 
+   - legen wir ebenfalls "absolute" ins selbe sticky-Viewport-Fenster. 
+   - anfangs scale(0.3), opacity:0 
+*/
+.iphone-wrap {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  color: #fff;
-  font-size: 3rem;
-}
-
-/* Dummy-Content (um Scroll-Abstand zu schaffen) */
-.content {
-  min-height: 100vh;
-  background: #f5f5f5;
-  padding: 50px;
-}
-
-/* iPhone Section */
-.iphone-section {
-  position: relative;
-  height: 150vh;
-  /* Viel Platz, damit man den Scroll-Effekt sieht */
-  background: #ececec;
-}
-
-/* iPhone-Container zentrieren und "sticky" positionieren */
-.iphone-container {
-  position: sticky;
-  top: 20px;
-  /* Der Abstand von oben beim Scrollen */
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-  height: 0;
-  /* Das iPhone selbst steuert die Höhe */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  width: 400px;
+  /* Rahmen-Breite, anpassen an dein PNG */
+  height: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* iPhone-Rahmen */
 .iphone-frame {
-  position: relative;
-  max-width: 300px;
-  /* Anpassen nach Bedarf */
-  width: 80%;
+  display: block;
+  width: 100%;
+  height: auto;
   z-index: 2;
 }
 
-/* Der "Bildschirm" des iPhones: verdeckte Fläche, in die das Bild reinkommt */
+/* iPhone-Screen: 
+   Wir machen hier ein überlappendes DIV oder IMG 
+   hinter dem Rahmen (oder darin). 
+*/
 .iphone-screen {
   position: absolute;
   top: 60px;
+  /* anpassen, damit es in der Aussparung sitzt */
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;  /* anpassen an die Größe des iPhone-Ausschnitts */
-  height: 420px; /* anpassen an die Größe des iPhone-Ausschnitts */
+  width: 360px;
+  height: 780px;
+  /* ggf. anpassen aufs "Display-Fenster" */
   overflow: hidden;
   z-index: 1;
-  /* Hintergrund statt IMG: */
-  background: url("bilder/hero.jpg") center center / cover no-repeat;
-  /* Anfangs noch unsichtbar oder klein – das regelst du per transform scale? */
-  transform-origin: top center;
-  transform: scale(0.3);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-
-/* Das Hero-Bild, das im iPhone-Screen liegt */
+/* Das Bild, das im iPhone angezeigt wird */
 .screen-image {
+  display: block;
   width: 100%;
-  height: auto;
-  transform-origin: top center;
-  transform: scale(0.3);
-  /* Startskala (klein) */
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Zusätzlicher Inhalt nach dem Sticky-Bereich */
+.content {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 2rem;
+  text-align: center;
 }

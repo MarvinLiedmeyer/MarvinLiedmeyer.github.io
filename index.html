@@ -4,38 +4,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parallax iPhone Hero</title>
-  <!-- Verweis auf dein CSS -->
+  <title>Hero Morph into iPhone</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-image"></div>
-    <h1 class="hero-title">Mein Hero Bild</h1>
-  </section>
 
-  <!-- INHALT, UM SCROLLABSTAND ZU ERZEUGEN -->
-  <section class="content">
-    <h2>Scroll weiter nach unten ...</h2>
-    <p>Hier könnte noch weiterer Inhalt stehen, um ausreichend Scroll-Platz zu schaffen.</p>
-  </section>
+  <!-- Eine sehr hohe Section, damit wir scrollen können -->
+  <section class="scroll-container">
+    <!-- Sticky Wrapper (bleibt "pinned", während wir scrollen) -->
+    <div class="sticky-wrapper">
 
-  <!-- IPHONE SECTION -->
-  <section class="iphone-section">
-    <div class="iphone-container">
-      <!-- iPhone-Rahmen (transparentes PNG oder SVG) -->
-      <img src="bilder/iphone-frame.png" alt="iPhone Rahmen" class="iphone-frame" />
+      <!-- HERO-Fullscreen-Bild (z.B. die Pferde) -->
+      <div class="hero-full"></div>
 
-      <!-- Der "Bildschirm" des iPhones, in dem das Hero-Bild liegt -->
-      <div class="iphone-screen">
-        <img src="bilder/hero.jpg" alt="Hero Bild in iPhone" class="screen-image" />
+      <!-- iPhone-Wrapper mit Rahmen und "Screen" -->
+      <div class="iphone-wrap">
+        <img class="iphone-frame" src="bilder/iphone-frame.png" alt="iPhone Rahmen" />
+        <div class="iphone-screen">
+          <!-- Das gleiche Pferdebild (oder Video), 
+               hier der Einfachheit halber als background oder als <img> -->
+          <img src="bilder/hero.jpg" alt="Hero in iPhone" class="screen-image" />
+        </div>
       </div>
-    </div>
+
+    </div> <!-- /sticky-wrapper -->
   </section>
 
-  <!-- JavaScript -->
+  <!-- Danach weiterer Content -->
+  <section class="content">
+    <h2>Scroll weiter nach unten...</h2>
+    <p>Hier könnte mehr Text stehen etc.</p>
+  </section>
+
   <script src="script.js"></script>
 </body>
 

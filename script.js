@@ -1,63 +1,50 @@
-// script.js
+// Selektoren
+const heroFull = document.querySelector(".hero-full");
+const iphoneWrap = document.querySelector(".iphone-wrap");
 
-// Wähle deine Elemente im DOM aus
-const heroImage = document.querySelector(".hero-image");
-const screenImage = document.querySelector(".screen-image");
-
-// Sicherheitscheck (optional)
-if (!heroImage) {
-  console.error("Fehler: .hero-image nicht gefunden!");
-}
-if (!screenImage) {
-  console.error("Fehler: .screen-image nicht gefunden!");
-}
-
-// Funktion, die beim Scrollen aufgerufen wird
+// Scroll-Listener
 window.addEventListener("scroll", () => {
-  // Wie weit ist gescrollt?
   const scrollY = window.scrollY;
+  const winH = window.innerHeight;
 
-  // Höhe des Browserfensters (für Berechnungen)
-  const viewportHeight = window.innerHeight;
-
-  // Hero-Bild soll 100vh hoch sein, also heroFullHeight = viewportHeight
-  const heroFullHeight = viewportHeight;
-
-  /* =============================
-     1) Hero-Bild verkleinern
-     ============================= */
-  if (scrollY < heroFullHeight) {
-    // factor = 0 (oben) bis 1 (ganz unten am Hero)
-    const factor = scrollY / heroFullHeight;
-    // Skaliere von 1 bis ~0.6
-    const scaleHero = 1 - factor * 0.4;
-    heroImage.style.transform = `scale(${scaleHero})`;
-    heroImage.style.opacity = `${1 - factor}`; // gleichzeitig Ausblenden
+  /*
+    1) Von scrollY=0 bis scrollY=winH:
+       -> Das Hero-Bild skaliert von 1 auf 0.3
+       -> Es blendet aus (opacity 1 -> 0)
+  */
+  if (scrollY < winH) {
+    const factor = scrollY / winH; // 0..1
+    const scaleHero = 1 - factor * 0.7; // 1 -> 0.3
+    heroFull.style.transform = `scale(${scaleHero})`;
+    heroFull.style.opacity = (1 - factor).toString();
   } else {
-    // Wenn wir schon unter dem Hero-Bild sind
-    heroImage.style.transform = "scale(0.6)";
-    heroImage.style.opacity = "0";
+    // Unterhalb von 1 Bildschirmhöhe
+    heroFull.style.transform = "scale(0.3)";
+    heroFull.style.opacity = "0";
   }
 
-  /* =============================
-     2) Bild im iPhone heranzoomen
-     ============================= */
-  const startZoom = heroFullHeight;    // ab Höhe des Hero-Bereichs
-  const endZoom = startZoom + 500;     // bis z.B. 500px später
+  /*
+    2) Von scrollY=winH bis scrollY=2*winH:
+       -> Das iPhone taucht auf (opacity:0->1), skaliert von 0.3->1
+  */
+  const startZoom = winH;        // ab 100vh
+  const endZoom = 2 * winH;      // bis 200vh
 
-  if (scrollY > startZoom) {
-    // Progress von 0..1 für den Zoom-Bereich
+  if (scrollY >= startZoom && scrollY <= endZoom) {
+    // progress: 0..1 
     let progress = (scrollY - startZoom) / (endZoom - startZoom);
     progress = Math.max(0, Math.min(1, progress));
 
-    // Skala von 0.3 bis 1
-    const scaleInside = 0.3 + 0.7 * progress;
-
-    screenImage.style.transform = `scale(${scaleInside})`;
-    screenImage.style.opacity = progress;
+    const scalePhone = 0.3 + 0.7 * progress; // 0.3->1
+    iphoneWrap.style.transform = `translate(-50%, -50%) scale(${scalePhone})`;
+    iphoneWrap.style.opacity = progress.toString();
+  } else if (scrollY < startZoom) {
+    // Noch vor dem Start
+    iphoneWrap.style.transform = "translate(-50%, -50%) scale(0.3)";
+    iphoneWrap.style.opacity = "0";
   } else {
-    // Vor dem Start-Zoom ist das iPhone-Bild klein & unsichtbar
-    screenImage.style.transform = "scale(0.3)";
-    screenImage.style.opacity = "0";
+    // Schon nach dem Ende
+    iphoneWrap.style.transform = "translate(-50%, -50%) scale(1)";
+    iphoneWrap.style.opacity = "1";
   }
 });
