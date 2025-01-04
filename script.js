@@ -2,6 +2,11 @@
 const heroImage = document.querySelector(".hero-image");
 const screenImage = document.querySelector(".screen-image");
 const iphoneSection = document.querySelector(".iphone-section");
+// ...
+const screenContainer = document.querySelector(".iphone-screen");
+// ...
+screenContainer.style.transform = `scale(${scaleInside})`;
+screenContainer.style.opacity = progress;
 
 // Funktion, die beim Scrollen getriggert wird
 window.addEventListener("scroll", () => {

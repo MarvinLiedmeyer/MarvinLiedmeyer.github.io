@@ -84,16 +84,22 @@ body {
 /* Der "Bildschirm" des iPhones: verdeckte Fläche, in die das Bild reinkommt */
 .iphone-screen {
   position: absolute;
-  /* Passe diese Werte an Deinen iPhone-Rahmen an,
-     sodass "screen" exakt hinter dem Rahmen liegt */
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;
-  height: 420px;
+  width: 240px;  /* anpassen an die Größe des iPhone-Ausschnitts */
+  height: 420px; /* anpassen an die Größe des iPhone-Ausschnitts */
   overflow: hidden;
   z-index: 1;
+  /* Hintergrund statt IMG: */
+  background: url("bilder/hero.jpg") center center / cover no-repeat;
+  /* Anfangs noch unsichtbar oder klein – das regelst du per transform scale? */
+  transform-origin: top center;
+  transform: scale(0.3);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 
 /* Das Hero-Bild, das im iPhone-Screen liegt */
 .screen-image {
