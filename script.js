@@ -1,50 +1,31 @@
-// Selektoren
-const heroFull = document.querySelector(".hero-full");
-const iphoneWrap = document.querySelector(".iphone-wrap");
+const morphElement = document.querySelector('.morph-element');
+const iphoneFrame = document.querySelector('.iphone-frame');
 
-// Scroll-Listener
-window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
-  const winH = window.innerHeight;
+// Finale Dimensionen des iPhone-Screens
+const FINAL_WIDTH = 350;  // iPhone Screen Breite
+const FINAL_HEIGHT = 760; // iPhone Screen Höhe
 
-  /*
-    1) Von scrollY=0 bis scrollY=winH:
-       -> Das Hero-Bild skaliert von 1 auf 0.3
-       -> Es blendet aus (opacity 1 -> 0)
-  */
-  if (scrollY < winH) {
-    const factor = scrollY / winH; // 0..1
-    const scaleHero = 1 - factor * 0.7; // 1 -> 0.3
-    heroFull.style.transform = `scale(${scaleHero})`;
-    heroFull.style.opacity = (1 - factor).toString();
-  } else {
-    // Unterhalb von 1 Bildschirmhöhe
-    heroFull.style.transform = "scale(0.3)";
-    heroFull.style.opacity = "0";
-  }
+window.addEventListener('scroll', () => {
+  const scrollProgress = window.scrollY / (window.innerHeight * 2);
+  const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
 
-  /*
-    2) Von scrollY=winH bis scrollY=2*winH:
-       -> Das iPhone taucht auf (opacity:0->1), skaliert von 0.3->1
-  */
-  const startZoom = winH;        // ab 100vh
-  const endZoom = 2 * winH;      // bis 200vh
+  if (scrollProgress <= 1) {
+    // Erste Animationsphase (0-100vh): Bild schrumpft zur Mitte
+    const scale = 1 - (clampedProgress * 0.6); // Schrumpft auf 40%
+    const borderRadius = clampedProgress * 40; // Rundet die Ecken ab
 
-  if (scrollY >= startZoom && scrollY <= endZoom) {
-    // progress: 0..1 
-    let progress = (scrollY - startZoom) / (endZoom - startZoom);
-    progress = Math.max(0, Math.min(1, progress));
+    // Berechne die aktuelle Größe
+    const currentWidth = window.innerWidth - (clampedProgress * (window.innerWidth - FINAL_WIDTH));
+    const currentHeight = window.innerHeight - (clampedProgress * (window.innerHeight - FINAL_HEIGHT));
 
-    const scalePhone = 0.3 + 0.7 * progress; // 0.3->1
-    iphoneWrap.style.transform = `translate(-50%, -50%) scale(${scalePhone})`;
-    iphoneWrap.style.opacity = progress.toString();
-  } else if (scrollY < startZoom) {
-    // Noch vor dem Start
-    iphoneWrap.style.transform = "translate(-50%, -50%) scale(0.3)";
-    iphoneWrap.style.opacity = "0";
-  } else {
-    // Schon nach dem Ende
-    iphoneWrap.style.transform = "translate(-50%, -50%) scale(1)";
-    iphoneWrap.style.opacity = "1";
+    morphElement.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    morphElement.style.borderRadius = `${borderRadius}px`;
+    morphElement.style.width = `${currentWidth}px`;
+    morphElement.style.height = `${currentHeight}px`;
+    morphElement.style.left = '50%';
+    morphElement.style.top = '50%';
+
+    // iPhone Frame einblenden
+    iphoneFrame.style.opacity = clampedProgress;
   }
 });

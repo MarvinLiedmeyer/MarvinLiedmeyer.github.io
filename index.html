@@ -2,40 +2,24 @@
 <html lang="de">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hero Morph into iPhone</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero to iPhone Morph Effect</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-  <!-- Eine sehr hohe Section, damit wir scrollen können -->
-  <section class="scroll-container">
-    <!-- Sticky Wrapper (bleibt "pinned", während wir scrollen) -->
-    <div class="sticky-wrapper">
-
-      <!-- HERO-Fullscreen-Bild (z.B. die Pferde) -->
-      <div class="hero-full"></div>
-
-      <!-- iPhone-Wrapper mit Rahmen und "Screen" -->
-      <div class="iphone-wrap">
-        <img class="iphone-frame" src="bilder/iphone-frame.png" alt="iPhone Rahmen" />
-        <div class="iphone-screen">
-          <!-- Das gleiche Pferdebild (oder Video), 
-               hier der Einfachheit halber als background oder als <img> -->
-          <img src="bilder/hero.jpg" alt="Hero in iPhone" class="screen-image" />
-        </div>
+  <div class="scroll-container">
+    <div class="sticky-container">
+      <div class="morph-wrapper">
+        <div class="morph-element"></div>
+        <img class="iphone-frame" src="iphone-frame.png" alt="iPhone Frame">
       </div>
-
-    </div> <!-- /sticky-wrapper -->
-  </section>
-
-  <!-- Danach weiterer Content -->
-  <section class="content">
-    <h2>Scroll weiter nach unten...</h2>
-    <p>Hier könnte mehr Text stehen etc.</p>
-  </section>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Weiterer Inhalt...</h2>
+  </div>
 
   <script src="script.js"></script>
 </body>
