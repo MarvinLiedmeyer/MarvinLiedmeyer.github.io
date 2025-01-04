@@ -1,15 +1,14 @@
-document.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const image = document.querySelector('.parallax-image');
-  const iphoneFrame = document.querySelector('.iphone-frame');
+const hero = document.getElementById('hero');
+const iphoneFrame = document.getElementById('iphoneFrame');
 
-  if (scrollY > window.innerHeight / 2) {
-      image.style.transform = 'scale(0.5)';
-      image.style.opacity = '0';
-      iphoneFrame.style.opacity = '1';
-  } else {
-      image.style.transform = 'scale(1)';
-      image.style.opacity = '1';
-      iphoneFrame.style.opacity = '0';
-  }
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 100) {
+        hero.style.opacity = 0;
+        iphoneFrame.classList.add('shrink');
+    } else {
+        hero.style.opacity = 1;
+        iphoneFrame.classList.remove('shrink');
+    }
 });
