@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parallax Hero Effect</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallax iPhone Hero</title>
+  <!-- Verweis auf dein CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="hero" id="hero">
-    <h1>Your Hero Title</h1>
-  </div>
-  <div class="iphone-frame" id="iphoneFrame">
-    <img src="bilder/hero.jpg" alt="Shrinking Hero">
-  </div>
-  <div class="scroll-container"></div>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <h1 class="hero-title">Mein Hero Bild</h1>
+  </section>
 
+  <!-- INHALT, UM SCROLLABSTAND ZU ERZEUGEN -->
+  <section class="content">
+    <h2>Scroll weiter nach unten ...</h2>
+    <p>Hier könnte noch weiterer Inhalt stehen, um ausreichend Scroll-Platz zu schaffen.</p>
+  </section>
+
+  <!-- IPHONE SECTION -->
+  <section class="iphone-section">
+    <div class="iphone-container">
+      <!-- iPhone-Rahmen (transparentes PNG oder SVG) -->
+      <img src="bilder/iphone-frame.png" alt="iPhone Rahmen" class="iphone-frame" />
+
+      <!-- Der "Bildschirm" des iPhones, in dem das Hero-Bild liegt -->
+      <div class="iphone-screen">
+        <img src="bilder/hero.jpg" alt="Hero Bild in iPhone" class="screen-image" />
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 
