@@ -5,6 +5,7 @@ const iphoneSection = document.querySelector(".iphone-section");
 
 // Funktion, die beim Scrollen getriggert wird
 window.addEventListener("scroll", () => {
+  console.log("scrolling");
   // Wie weit ist gescrollt?
   const scrollY = window.scrollY;
 
