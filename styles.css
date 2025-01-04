@@ -7,13 +7,11 @@
 body {
   background: #000;
   overflow-x: hidden;
-  min-height: 100vh;
 }
 
 .scroll-container {
-  height: 300vh;
-  position: relative;
-  background: #000;
+  height: 200vh;
+  /* Zwei Bildschirmhöhen für den Scroll-Effekt */
 }
 
 .sticky-container {
@@ -23,41 +21,61 @@ body {
   overflow: hidden;
 }
 
-.morph-wrapper {
+/* Hero-Bild */
+.hero-image {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  background: url('hero.jpg') center center / cover no-repeat;
+  will-change: transform, opacity;
 }
 
-/* Wichtig: Initiale Darstellung des Hero-Bildes */
-.morph-element {
+/* iPhone Container */
+.iphone-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  /* Anpassen an Ihre iPhone-Größe */
+  height: 820px;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* iPhone Rahmen */
+.iphone-frame {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url('bilder/hero.jpg') center center / cover no-repeat;
-  transform-origin: center center;
-  will-change: transform, border-radius, width, height;
-  /* Entfernt die initiale Transformation */
-  left: 0;
-  top: 0;
-  transform: none;
-}
-
-.iphone-frame {
-  position: absolute;
-  width: 380px;
-  height: 820px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
   z-index: 2;
 }
 
+/* iPhone Screen */
+.iphone-screen {
+  position: absolute;
+  top: 18px;
+  /* Anpassen an Ihre iPhone-Frame Dimensionen */
+  left: 22px;
+  right: 22px;
+  bottom: 18px;
+  overflow: hidden;
+  border-radius: 35px;
+  /* Anpassen an Ihre iPhone-Frame Dimensionen */
+}
+
+/* Bild im iPhone Screen */
+.screen-image {
+  width: 100%;
+  height: 100%;
+  background: url('hero.jpg') center center / cover no-repeat;
+}
+
+/* Content-Bereich */
 .content {
   background: #fff;
-  padding: 2rem;
-  position: relative;
   min-height: 100vh;
+  padding: 2rem;
 }
