@@ -1,31 +1,41 @@
+// Finale Dimensionen des iPhone-Screens
+const FINAL_WIDTH = 350;
+const FINAL_HEIGHT = 760;
+
+// DOM-Elemente
 const morphElement = document.querySelector('.morph-element');
 const iphoneFrame = document.querySelector('.iphone-frame');
 
-// Finale Dimensionen des iPhone-Screens
-const FINAL_WIDTH = 350;  // iPhone Screen Breite
-const FINAL_HEIGHT = 760; // iPhone Screen Höhe
+// Scroll-Handler
+function handleScroll() {
+  // Berechne den Scroll-Fortschritt (0 bis 1)
+  const scrollProgress = window.scrollY / window.innerHeight;
 
-window.addEventListener('scroll', () => {
-  const scrollProgress = window.scrollY / (window.innerHeight * 2);
-  const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
-
+  // Animation nur während der ersten Bildschirmhöhe
   if (scrollProgress <= 1) {
-    // Erste Animationsphase (0-100vh): Bild schrumpft zur Mitte
-    const scale = 1 - (clampedProgress * 0.6); // Schrumpft auf 40%
-    const borderRadius = clampedProgress * 40; // Rundet die Ecken ab
+    // Basis-Skalierung von 1 zu 0.4
+    const scale = 1 - (scrollProgress * 0.6);
 
-    // Berechne die aktuelle Größe
-    const currentWidth = window.innerWidth - (clampedProgress * (window.innerWidth - FINAL_WIDTH));
-    const currentHeight = window.innerHeight - (clampedProgress * (window.innerHeight - FINAL_HEIGHT));
+    // Border-Radius von 0 zu 40px
+    const borderRadius = scrollProgress * 40;
 
-    morphElement.style.transform = `translate(-50%, -50%) scale(${scale})`;
-    morphElement.style.borderRadius = `${borderRadius}px`;
+    // Größenanpassung
+    const currentWidth = window.innerWidth - (scrollProgress * (window.innerWidth - FINAL_WIDTH));
+    const currentHeight = window.innerHeight - (scrollProgress * (window.innerHeight - FINAL_HEIGHT));
+
+    // Styles anwenden
     morphElement.style.width = `${currentWidth}px`;
     morphElement.style.height = `${currentHeight}px`;
-    morphElement.style.left = '50%';
-    morphElement.style.top = '50%';
+    morphElement.style.borderRadius = `${borderRadius}px`;
+    morphElement.style.transform = `translate(-50%, -50%) scale(${scale})`;
 
     // iPhone Frame einblenden
-    iphoneFrame.style.opacity = clampedProgress;
+    iphoneFrame.style.opacity = scrollProgress;
   }
-});
+}
+
+// Event-Listener hinzufügen
+window.addEventListener('scroll', handleScroll);
+
+// Initial aufrufen
+handleScroll();
