@@ -1,54 +1,59 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .hero {
-    height: 100vh;
-    background: linear-gradient(to bottom, #000, #333);
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .parallax-section {
-    position: relative;
-  }
-  
-  .parallax {
-    height: 50vh;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  }
-  
-  #parallax1 {
-    background-image: url('https://via.placeholder.com/1920x1080'); /* Hier echte Bilder einfügen */
-  }
-  
-  #parallax2 {
-    background-image: url('https://via.placeholder.com/1920x1080');
-  }
-  
-  .content {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.parallax-section {
+  position: relative;
+  height: 200vh;
+  background: #f0f0f0;
+}
+
+.parallax-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 800px;
+  z-index: 1;
+}
+
+.parallax-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.iphone-frame {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 600px;
+  background: url('iphone-frame.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.iphone-screen {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.iphone-image {
+  width: 100%;
+  height: auto;
+  transform: scale(1.2);
+}
