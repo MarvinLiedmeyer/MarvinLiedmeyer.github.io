@@ -1,0 +1,54 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .hero {
+    height: 100vh;
+    background: linear-gradient(to bottom, #000, #333);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .parallax-section {
+    position: relative;
+  }
+  
+  .parallax {
+    height: 50vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  #parallax1 {
+    background-image: url('https://via.placeholder.com/1920x1080'); /* Hier echte Bilder einfügen */
+  }
+  
+  #parallax2 {
+    background-image: url('https://via.placeholder.com/1920x1080');
+  }
+  
+  .content {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
